@@ -111,7 +111,6 @@ MIT License
 
 # Author
 Daoba-X
-Battery Materials Research
 
 ---
 
