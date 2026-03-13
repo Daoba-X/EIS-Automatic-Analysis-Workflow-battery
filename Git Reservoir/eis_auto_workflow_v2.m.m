@@ -1,39 +1,10 @@
 function results = eis_battery_workflow_complete_v2()
 %{
-EIS 电池体系自动分析工作流（升级版）
+EIS 电池体系自动分析工作流
 ===========================================================
-本代码用于对电池电解质 / 正极 / 全电池的 EIS 原始数据进行自动化分析，
-并输出“原始数据-拟合结果 Nyquist 叠图”、Bode 图、残差图、候选模型排名表、
-最佳模型参数表以及总汇总表。
 
-【本升级版新增内容】
-1. 在 candidate_models_ranking.csv 中增加：
-   - variance（残差方差估计，SSE/(N-k)）
-   - sigma2（同 variance，便于统计解释）
-   - deltaAIC、deltaBIC（相对最佳模型的差值）
-   - n_param（参数个数）
-2. 在每个样品输出目录中自动生成：
-   - model_selection_explanation.txt
-   用中文说明 SSE、variance、RMSE、AIC、BIC 的含义，以及如何解读。
-3. 原始 Nyquist 数据与拟合 Nyquist 曲线画在同一张图上，便于人工判断拟合合理性。
-4. 对候选模型按照 BIC 升序排名；若 BIC 接近，可再结合 RMSE、Nyquist 叠图、残差图人工判断。
-5. 保留适合电池体系的常见候选模型库：
-   - Rs + (R1||Q1)
-   - Rs + (R1||Q1) + (R2||Q2)
-   - Rs + (R1||Q1) + W
-   - Rs + (R1||Q1) + (R2||Q2) + W
 
-【模型选择逻辑】
-- SSE / variance / RMSE：反映拟合误差大小，越小越好
-- AIC / BIC：在考虑误差的同时惩罚模型复杂度，越小越好
-- 默认以 BIC 作为主排序依据，AIC / RMSE 作为辅助参考
-- 最终是否“物理可解释”，仍需结合 Nyquist 叠图与残差图人工复核
 
-【注意】
-1. 本代码做的是“候选模型库内的自动选模”，不是保证唯一物理正确模型。
-2. 对“没跑起来”“低频未闭合”“强非稳态”的数据，程序可给出经验拟合结果，
-   但不建议过度物理解释。
-3. 建议配合不同 SOC、循环前后、对照组一起分析。
 
 【运行方式】
 results = eis_battery_workflow_complete_v2();
