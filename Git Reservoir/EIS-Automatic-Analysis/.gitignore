@@ -1,0 +1,20 @@
+# 忽略 Windows 系统文件和目录
+AppData/
+OneDrive/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Music/
+Pictures/
+Saved Games/
+NTUSER.DAT
+*.log
+*.bak
+*.tmp
+*.swp
+
+# 忽略其他不必要的文件
+*.zip
+*.tar.gz
+*.rar
